@@ -3,7 +3,8 @@ import './App.css';
 import fire from './fire';
 import Home from './Home';
 import Login from './Login';
-import Test from './Test'
+import Test from './Test2'
+import Signin from './Signin'
 
 class App extends Component {
   constructor() {
@@ -31,7 +32,7 @@ class App extends Component {
   }
   render() {
     return (
-     <div>{this.state.user ? ( <Home/>) 
+     <div>{this.state.user  ? ( <Home/>) 
         : 
         (<Test />)}
       </div>

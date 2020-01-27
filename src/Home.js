@@ -89,7 +89,9 @@ class Home extends Component {
                 for (var business in data){
                     console.log(business)
                     if (business === userid){
-                        that.findList()
+                        that.setState({
+                            showBusiness: true
+                        })
                     }
                 }
             }
@@ -101,7 +103,9 @@ class Home extends Component {
                 for (var business in data){
                     console.log(business)
                     if (business === userid){
-                        that.findBusinessList()
+                        that.setState({
+                            showBusiness: false
+                        })
                     }
                 }
             }
@@ -113,6 +117,7 @@ class Home extends Component {
         // console.log("mount")
         // this.checkType()
     //    this.findList()
+        this.checkType()
     }
 
 
@@ -138,7 +143,10 @@ class Home extends Component {
             //     <button type="submit" onClick={this.logout} class="btn btn-primary">Sign Out</button>
 
             // </div>
-            (<Influencer />)
+            <div>
+            {this.state.showBusiness ? (<Business />) : (<Influencer />)}            
+
+            </div>
            
         );
     }

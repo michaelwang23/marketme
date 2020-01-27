@@ -7,6 +7,10 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -17,6 +21,9 @@ import logo from './Cadence.png'
 import Container from '@material-ui/core/Container';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@material-ui/core/AppBar';
+
 import ReactDOM from 'react-dom';
 import Toggle from 'react-bootstrap-toggle';
 
@@ -24,12 +31,21 @@ import Toggle from 'react-bootstrap-toggle';
 class SignInSide extends Component {
     constructor(props) {
         super(props);
+        var card1 = {
+          name: "Michael",
+          followers: 1000,
+        }
+        var card2 = {
+          name: "Carolyn",
+          followers: 2000,
+        }
         this.state = {
           email: '',
           password: '',
           signup: false,
           toggleActive: false,
-          decided: false
+          decided: false,
+          cards: [card1, card2]
         };
       }
       handleChange = (e) => {
@@ -102,7 +118,8 @@ class SignInSide extends Component {
             //signup == false
             <div>
             {this.state.influencer === true ? 
-            //influencer == true
+           
+            // influencer == true
             <Container component="main" maxWidth="xs">
               <CssBaseline />
               <div className={classes.paper}>
@@ -445,37 +462,115 @@ class SignInSide extends Component {
     }
             </div>
             : 
-        <div>
-        Welcome to publicizeMe. It's simple: Get paid to share/post other people's events.
-        <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                  onClick={() => {
-                      this.setState({
-                            influencer: true,
-                            decided: true
-                      })
-                  }}
-                >
-                  Go to the Influencers Home Page
-        </Button>
-        <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                  onClick={() => {
-                    this.setState({
-                          influencer: false,
-                          decided: true
-                    })
-                }}
-                >
-                  Go to the Businesses Home Page
-        </Button>
-        </div>
+             <React.Fragment>
+            <CssBaseline />
+            <AppBar position="relative">
+              <Toolbar>
+                <Typography variant="h6" color="inherit" noWrap>
+                </Typography>
+              </Toolbar>
+            </AppBar>
+            <main>
+              {/* Hero unit */}
+              <div className={classes.heroContent}>
+                <Container maxWidth="sm">
+                  <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                    publicizeMe
+                  </Typography>
+                  <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                    Pay people to share or post about you on Instagram
+                  </Typography>
+                  <div className={classes.heroButtons}>
+                    <Grid container spacing={2} justify="center">
+                      <Grid item>
+                        <Button variant="contained" color="primary">
+                          Main call to action
+                        </Button>
+                      </Grid>
+                      <Grid item>
+                        <Button variant="outlined" color="primary">
+                          Secondary action
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </div>
+                </Container>
+              </div>
+              <Container className={classes.cardGrid} maxWidth="md">
+          {/* End hero unit */}
+          <Grid container spacing={4}>
+            {this.state.cards.map(card => (
+              <Grid item key={card} xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image={require('./Cadence.png')}
+                    title="Image title"
+                  />
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {card.name}
+                    </Typography>
+                    <Typography>
+                      Instagram followers: {card.followers}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      View
+                    </Button>
+                    <Button size="small" color="primary">
+                      Edit
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+            </main>
+            {/* Footer */}
+            <footer className={classes.footer}>
+              <Typography variant="h6" align="center" gutterBottom>
+                Footer
+              </Typography>
+              <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+                Something here to give the footer a purpose!
+              </Typography>
+            </footer>
+            {/* End footer */}
+          </React.Fragment>
+        // <div>
+        // Welcome to publicizeMe. It's simple: Get paid to share/post other people's events.
+        // <Button
+        //           type="submit"
+        //           variant="contained"
+        //           color="primary"
+        //           className={classes.submit}
+        //           onClick={() => {
+        //               this.setState({
+        //                     influencer: true,
+        //                     decided: true
+        //               })
+        //           }}
+        //         >
+        //           Go to the Influencers Home Page
+        // </Button>
+        // <Button
+        //           type="submit"
+        //           variant="contained"
+        //           color="primary"
+        //           className={classes.submit}
+        //           onClick={() => {
+        //             this.setState({
+        //                   influencer: false,
+        //                   decided: true
+        //             })
+        //         }}
+        //         >
+        //           Go to the Businesses Home Page
+        // </Button>
+        // </div>
 
 }
 </div>
@@ -497,6 +592,33 @@ let classes = ({
         marginTop: 20
       },
       submit: {
+      },
+      heroContent: {
+        // backgroundColor: theme.palette.background.paper,
+      },
+      heroButtons: {
+        marginTop: 4
+      },
+      cardGrid: {
+        paddingTop: 8,
+        paddingBottom: 8
+      },
+      card: {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      },
+      cardMedia: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9,
+        marginTop:'30'
+      },
+      cardContent: {
+        flexGrow: 1,
+      },
+      footer: {
+        // backgroundColor: theme.palette.background.paper,
+        // padding: theme.spacing(6),
       },
   });
 export default SignInSide;
