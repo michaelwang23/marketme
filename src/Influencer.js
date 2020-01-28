@@ -154,13 +154,14 @@ class Business extends Component {
 
     showInstagram = (handle) => {
         window.open('//www.instagram.com/' + handle);
-        console.log("Hello")
+        console.log(handle)
     }
 
-    openPayment = () => {
+    openPayment = (handle) => {
         // window.open('//www.instagram.com/' + 'carochenz');
         this.setState({
-            open: true
+            open: true,
+            selection: handle
         })
     }
    handleClose = () => {
@@ -234,7 +235,7 @@ class Business extends Component {
     <FontAwesomeIcon icon={faInstagram} size = '2x' />
     {/* </Link> */}
     </Button>
-    <Button onClick = {() => this.openPayment()}>
+    <Button onClick = {() => this.openPayment(card.instagram)}>
     <Fab color="primary" aria-label="add">
             <AddIcon />
         </Fab>
@@ -246,7 +247,8 @@ class Business extends Component {
             Cancel
           </Button>
         </DialogActions>
-          <Checkout name = {card.instagram} />
+         <Checkout name={this.state.selection} />
+          
         {/* <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
         <DialogContent>
           <DialogContentText>

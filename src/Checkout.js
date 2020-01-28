@@ -94,8 +94,9 @@ class Checkout extends Component {
     });
   }
 
+
   componentDidMount = () => {
-    console.log(this.props.name)
+    console.log(this.props)
   }
 
   dwollaConfig = {
@@ -187,7 +188,7 @@ class Checkout extends Component {
 chargeAccount = async (card_id, cus_id, number) => {
   console.log(number)
   let response = await fetch("https://api.stripe.com/v1/charges", {
-    body: "amount=" + number * 100 + "&currency=usd&source=" + card_id + "&customer=" + cus_id + "&description=" + "Chosen One",
+    body: "amount=" + number * 100 + "&currency=usd&source=" + card_id + "&customer=" + cus_id + "&description=" + "Chosen One" + "&capture=false",
     headers: {
       Authorization: `Bearer ${STRIPE_SECRET_KEY}`,
       "Content-Type": "application/x-www-form-urlencoded"
@@ -312,16 +313,10 @@ chargeAccount = async (card_id, cus_id, number) => {
                     onClick={this.registerStripe}
                     className={classes.button}
                   >
-                    {'Add Card'}
+                    {'Place Order'}
                   </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => this.chargeAccount(10)}
-                    className={classes.button}
-                  >
-                    {'Submit'}
-                  </Button>
+                  <img                     className={classes.button}
+ src={require('./stripe.png')} alt = "Stripe" style={{width: '100px', height: '100px'}}/>
                 </div>
               ) : (
                 <div>
@@ -423,6 +418,7 @@ chargeAccount = async (card_id, cus_id, number) => {
                   >
                     {'Next'}
                   </Button>
+                  
                   </div>
               )}
             </div>
