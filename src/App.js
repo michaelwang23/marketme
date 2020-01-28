@@ -5,6 +5,8 @@ import Home from './Home';
 import Login from './Login';
 import Test from './Test2'
 import Signin from './Signin'
+import Checkout from './Checkout'
+import Plaid from './plaid'
 
 class App extends Component {
   constructor() {

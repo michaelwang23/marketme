@@ -113,9 +113,14 @@ class Business extends Component {
     }
 
 
+
     findList = () => {
         const rootRef = fire.database().ref();
         const post = rootRef.child('businesses').orderByKey();
+
+
+
+
         post.once('value', snap => {
             snap.forEach(child => {
                 // console.log(child.val())
